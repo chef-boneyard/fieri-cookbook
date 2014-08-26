@@ -26,7 +26,7 @@ directory "#{node['fieri']['home']}/shared" do
   recursive true
 end
 
-directory "#{node['fieri']['home']}/log" do
+directory "#{node['fieri']['home']}/shared/log" do
   user 'fieri'
   group 'fieri'
   mode 0755

@@ -12,4 +12,12 @@ describe 'fieri' do
   describe file('/srv/fieri/current/log') do
     it { should be_linked_to '/srv/fieri/shared/log' }
   end
+
+  describe file('/srv/fieri/shared') do
+    it { should be_directory }
+  end
+
+  describe file('/srv/fieri/shared/log') do
+    it { should be_directory }
+  end
 end
