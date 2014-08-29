@@ -6,6 +6,7 @@
 #
 
 include_recipe 'redisio::install'
+include_recipe 'redisio::configure'
 include_recipe 'redisio::enable'
 
 include_recipe 'fieri::_apt'

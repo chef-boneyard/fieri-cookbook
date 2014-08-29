@@ -7,6 +7,12 @@ describe 'fieri' do
 
   describe file('/srv/fieri/current/.env') do
     it { should be_linked_to '/srv/fieri/shared/.env.production' }
+
+    describe 'SENTRY_URL' do
+      it 'it is the file' do
+        expect(open('/srv/fieri/current/.env').read).to include('SENTRY_URL=test')
+      end
+    end
   end
 
   describe file('/srv/fieri/current/log') do
