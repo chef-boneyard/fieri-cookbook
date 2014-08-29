@@ -53,16 +53,6 @@ file "#{node['fieri']['home']}/shared/.env.production" do
   notifies :restart, 'service[sidekiq]'
 end
 
-#template "#{node['fieri']['home']}/shared/.env.production" do
-  #variables(app: app)
-
-  #user 'fieri'
-  #group 'fieri'
-
-  #notifies :restart, 'service[unicorn]'
-  #notifies :restart, 'service[sidekiq]'
-#end
-
 template "#{node['fieri']['home']}/shared/unicorn.rb" do
   source 'unicorn.rb.erb'
 end
