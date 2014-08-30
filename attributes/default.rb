@@ -19,3 +19,5 @@
 
 default['fieri']['home'] = '/srv/fieri'
 default['fieri']['data_bag'] = 'fieri'
+
+default['redisio']['servers'] = [{ 'port' => '6379' }]

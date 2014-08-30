@@ -33,10 +33,18 @@ directory "#{node['fieri']['home']}/shared/log" do
   recursive true
 end
 
-app = data_bag_item(:apps, node['fieri']['data_bag'])
+begin
+  app = data_bag_item(:apps, node['fieri']['data_bag'])
+rescue Net::HTTPServerException => e
+  if e.response.code.to_i == 404
+    Chef::Application.fatal! "This recipe requires a data bag item in the apps data bag, defined in the node['fieri']['data_bag'] attribute."
+  else
+    raise
+  end
+end
 
-template "#{node['fieri']['home']}/shared/.env.production" do
-  variables(app: app)
+file "#{node['fieri']['home']}/shared/.env.production" do
+  content app.map { |k, v| "#{k.upcase}=#{v}" }.join("\n")
 
   user 'fieri'
   group 'fieri'
