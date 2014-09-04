@@ -6,7 +6,7 @@ describe 'fieri' do
   end
 
   describe file('/srv/fieri/current/.env') do
-    it { should be_linked_to '/srv/fieri/shared/.env.production' }
+    it { should be_linked_to '/srv/fieri/shared/env' }
 
     describe 'SENTRY_URL' do
       it 'it is the file' do
@@ -15,15 +15,7 @@ describe 'fieri' do
     end
   end
 
-  describe file('/srv/fieri/current/log') do
-    it { should be_linked_to '/srv/fieri/shared/log' }
-  end
-
   describe file('/srv/fieri/shared') do
-    it { should be_directory }
-  end
-
-  describe file('/srv/fieri/shared/log') do
     it { should be_directory }
   end
 end
