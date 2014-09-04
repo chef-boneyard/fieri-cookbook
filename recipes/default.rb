@@ -6,10 +6,8 @@
 #
 
 include_recipe 'apt'
-include_recipe 'brightbox-ruby'
 include_recipe 'redisio::install'
 include_recipe 'redisio::enable'
-include_recipe 'xml'
 
 include_recipe 'fieri::_runit'
 include_recipe 'fieri::_nginx'
