@@ -59,17 +59,13 @@ deploy_revision node['fieri']['home'] do
   user 'fieri'
   group 'fieri'
 
+  create_dirs_before_symlink %w[ vendor ]
   symlinks 'env' => '.env', 'bundle' => 'vendor/bundle'
   migrate false
   symlink_before_migrate({})
   purge_before_symlink []
-  create_dirs_before_symlink []
 
   environment 'RACK_ENV' => 'production'
-
-  before_symlink do
-    directory "#{release_path}/vendor"
-  end
 
   before_restart do
     execute 'bundle install --deployment' do
