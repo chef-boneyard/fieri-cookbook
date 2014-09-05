@@ -5,7 +5,9 @@
 # Copyright 2014 Chef Software, Inc.
 #
 
-package 'git'
+include_recipe 'git'
+include_recipe 'xml'
+include_recipe 'fieri::_ruby'
 
 group 'fieri' do
   system true
@@ -19,18 +21,13 @@ user 'fieri' do
   shell '/bin/bash'
 end
 
-directory "#{node['fieri']['home']}/shared" do
-  user 'fieri'
-  group 'fieri'
-  mode 0755
-  recursive true
-end
-
-directory "#{node['fieri']['home']}/shared/log" do
-  user 'fieri'
-  group 'fieri'
-  mode 0755
-  recursive true
+%w[ shared shared/bundle ].each do |dir|
+  directory "#{node['fieri']['home']}/#{dir}" do
+    user 'fieri'
+    group 'fieri'
+    mode 0755
+    recursive true
+  end
 end
 
 begin
@@ -43,11 +40,12 @@ rescue Net::HTTPServerException => e
   end
 end
 
-file "#{node['fieri']['home']}/shared/.env.production" do
+file "#{node['fieri']['home']}/shared/env" do
   content app.map { |k, v| "#{k.upcase}=#{v}" }.join("\n")
 
   user 'fieri'
   group 'fieri'
+  mode '0600'
 
   notifies :restart, 'service[unicorn]'
   notifies :restart, 'service[sidekiq]'
@@ -62,22 +60,19 @@ deploy_revision node['fieri']['home'] do
   revision 'master'
   user 'fieri'
   group 'fieri'
+
+  create_dirs_before_symlink %w[ vendor ]
+  symlinks 'env' => '.env', 'bundle' => 'vendor/bundle'
   migrate false
-  symlink_before_migrate.clear
+  symlink_before_migrate({})
+  purge_before_symlink []
+
   environment 'RACK_ENV' => 'production'
 
   before_restart do
-    execute 'bundle install' do
+    execute 'bundle install --deployment' do
       cwd release_path
-      command 'bundle install --without test development --path=vendor/bundle'
-    end
-
-    link "#{node['fieri']['home']}/current/.env" do
-      to "#{node['fieri']['home']}/shared/.env.production"
-    end
-
-    link "#{node['fieri']['home']}/current/log" do
-      to "#{node['fieri']['home']}/shared/log"
+      user 'fieri'
     end
   end
 

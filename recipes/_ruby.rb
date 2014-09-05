@@ -22,8 +22,4 @@ package 'ruby2.0-dev'
   end
 end
 
-# Nokogiri requires XML
-package 'libxslt-dev'
-package 'libxml2-dev'
-
 gem_package 'bundler'
