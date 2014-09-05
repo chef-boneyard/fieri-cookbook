@@ -5,9 +5,9 @@
 # Copyright 2014 Chef Software, Inc.
 #
 
-include_recipe 'brightbox-ruby'
 include_recipe 'git'
 include_recipe 'xml'
+include_recipe 'fieri::_ruby'
 
 group 'fieri' do
   system true
@@ -21,11 +21,13 @@ user 'fieri' do
   shell '/bin/bash'
 end
 
-directory "#{node['fieri']['home']}/shared" do
-  user 'fieri'
-  group 'fieri'
-  mode 0755
-  recursive true
+%w[ shared shared/bundle ].each do |dir|
+  directory "#{node['fieri']['home']}/#{dir}" do
+    user 'fieri'
+    group 'fieri'
+    mode 0755
+    recursive true
+  end
 end
 
 begin

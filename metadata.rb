@@ -7,7 +7,6 @@ long_description 'Installs/Configures fieri'
 version          '0.2.0'
 
 depends          'apt'
-depends          'brightbox-ruby'
 depends          'git'
 depends          'redisio'
 depends          'xml'
