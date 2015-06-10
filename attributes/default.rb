@@ -21,3 +21,10 @@ default['fieri']['home'] = '/srv/fieri'
 default['fieri']['data_bag'] = 'fieri'
 
 default['redisio']['servers'] = [{ 'port' => '6379' }]
+
+case node['platform']
+when 'redhat', 'centos', 'scientific', 'fedora', 'amazon', 'oracle'
+  default['fieri']['gem']['dep_packages'] = %w(libxml2 libxml2-devel libxslt libxslt-devel)
+else
+  default['fieri']['gem']['dep_packages'] = %w(libxslt-dev libxml2-dev)
+end

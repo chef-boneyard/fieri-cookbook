@@ -5,21 +5,30 @@
 # Copyright 2014 Chef Software, Inc.
 #
 
-apt_repository 'brightbox-ruby' do
-  uri 'http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu'
-  distribution node['lsb']['codename']
-  components ['main']
-  keyserver 'keyserver.ubuntu.com'
-  key 'C3173AA6'
-end
+node.default['rubies']['list']                 = ['ruby 2.0.0-p594']
+node.default['rubies']['bundler']['install']   = false
+node.default['chruby_install']['default_ruby'] = true
 
-package 'ruby2.0'
-package 'ruby2.0-dev'
+include_recipe 'rubies'
 
-%w{erb gem irb rake rdoc ri ruby testrb}.each do |rb|
+# package 'ruby2.0'
+# package 'ruby2.0-dev'
+%w(erb gem irb rake rdoc ri ruby testrb bundle bundler).each do |rb|
   link "/usr/bin/#{rb}" do
-    to "/usr/bin/#{rb}2.0"
+    to "/opt/rubies/ruby-2.0.0-p594/bin/#{rb}"
   end
 end
 
-gem_package 'bundler'
+node['fieri']['gem']['dep_packages'].each do |pkg|
+  package pkg
+end
+
+gem_package 'bundler' do
+  gem_binary '/opt/rubies/ruby-2.0.0-p594/bin/gem'
+  version '>= 1.7.3'
+end
+%w(bundle bundler).each do |rb|
+  link "/usr/bin/#{rb}" do
+    to "/opt/rubies/ruby-2.0.0-p594/bin/#{rb}"
+  end
+end

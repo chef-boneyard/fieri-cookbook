@@ -8,5 +8,11 @@ version          '0.2.0'
 
 depends          'apt'
 depends          'git'
+depends          'nginx'
 depends          'redisio'
+depends          'rubies'
+depends          'runit'
 depends          'xml'
+
+supports 'ubuntu'
+supports 'centos'

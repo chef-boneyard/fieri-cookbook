@@ -5,7 +5,7 @@
 # Copyright 2014 Chef Software, Inc.
 #
 
-package 'nginx'
+include_recipe 'nginx'
 
 template '/etc/nginx/sites-available/default' do
   source 'fieri.nginx.erb'
