@@ -8,6 +8,7 @@
 include_recipe 'git'
 include_recipe 'xml'
 include_recipe 'fieri::_ruby'
+include_recipe 'fieri::_runit'
 
 begin
   app = data_bag_item(:apps, node['fieri']['data_bag'])
