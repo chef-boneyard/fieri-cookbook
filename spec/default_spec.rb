@@ -7,6 +7,8 @@ describe 'fieri::default' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new do |node|
       stub_data_bag_item("apps", "fieri").and_return({map: "test"})
+      stub_command("git --version >/dev/null").and_return('1.7.3')
+      stub_command("which nginx").and_return('/usr/bin/nginx')
     end.converge(described_recipe)
   end
 

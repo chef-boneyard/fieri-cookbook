@@ -6,7 +6,6 @@ require 'fauxhai'
 describe 'fieri::_users' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new do |node|
-      node['fieri']['home'] = '/test'
     end.converge(described_recipe)
   end
 
@@ -19,11 +18,11 @@ describe 'fieri::_users' do
   end
 
   it 'creates bundle dirs' do
-    expect(chef_run).to create_directory('/test/shared')
-    expect(chef_run).to create_directory('/test/shared/bundle')
+    expect(chef_run).to create_directory('/srv/fieri/shared')
+    expect(chef_run).to create_directory('/srv/fieri/shared/bundle')
   end
 
   it 'creates .gemrc file' do
-    expect(chef_run).to create_file('/test/.gemrc')
+    expect(chef_run).to create_file('/srv/fieri/.gemrc')
   end
 end

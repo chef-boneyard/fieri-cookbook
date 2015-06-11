@@ -6,7 +6,7 @@ require 'fauxhai'
 describe 'fieri::_nginx' do
   let(:chef_run) do
     ChefSpec::SoloRunner.new do |node|
-    	stub_command("which nginx").and_return('/etc/nginx')
+    	stub_command("which nginx").and_return('/usr/bin/nginx')
     end.converge(described_recipe)
   end
 

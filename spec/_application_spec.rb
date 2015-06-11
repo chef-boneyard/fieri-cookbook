@@ -33,5 +33,11 @@ describe 'fieri::_application' do
     expect(chef_run).to include_recipe('fieri::_runit')
   end
 
+  it 'creates env file' do
+    expect(chef_run).to create_file('/srv/fieri/shared/env')
+  end
 
+  it 'deploys unicorn template' do
+    expect(chef_run).to create_template('/srv/fieri/shared/unicorn.rb')
+  end
 end
