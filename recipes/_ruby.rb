@@ -27,8 +27,3 @@ gem_package 'bundler' do
   gem_binary '/opt/rubies/ruby-2.0.0-p594/bin/gem'
   version '>= 1.7.3'
 end
-%w(bundle bundler).each do |rb|
-  link "/usr/bin/#{rb}" do
-    to "/opt/rubies/ruby-2.0.0-p594/bin/#{rb}"
-  end
-end
