@@ -4,7 +4,7 @@ maintainer_email 'supermarket@getchef.com'
 license          'Apache 2.0'
 description      'Installs/Configures fieri'
 long_description 'Installs/Configures fieri'
-version          '0.2.0'
+version          '0.3.0'
 
 depends          'apt'
 depends          'git'
