@@ -15,8 +15,8 @@ describe 'fieri::_nginx' do
   end
 
   it 'creates nginx template' do
-    expect(chef_run).to create_template('/etc/nginx/sites-available/default')
-    resource = chef_run.template('/etc/nginx/sites-available/default')
+    expect(chef_run).to create_template('/etc/nginx/sites-available/fieri')
+    resource = chef_run.template('/etc/nginx/sites-available/fieri')
     expect(resource).to notify('service[nginx]').to(:restart).immediately
   end
 
