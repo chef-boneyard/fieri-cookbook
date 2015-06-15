@@ -29,3 +29,10 @@ end
 file ::File.join(node['fieri']['home'], '.gemrc') do
   content 'gem: --no-ri --no-rdoc --bindir /usr/bin'
 end
+
+directory '/var/run/fieri/' do
+  user 'fieri'
+  group 'fieri'
+  mode 0755
+  recursive true
+end

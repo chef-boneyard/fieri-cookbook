@@ -1,5 +1,5 @@
 upstream unicorn {
-  server unix:/tmp/.fieri.sock.0;
+  server unix:<%= node['fieri']['socket'] %>;
 }
 
 server {

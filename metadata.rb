@@ -9,7 +9,8 @@ version          '0.2.0'
 depends          'apt'
 depends          'git'
 depends          'nginx'
-depends          'redisio'
+depends 'redisio', '~> 1.7.1' # Versions > 1 use different recipes
+depends 'ruby_install', '~> 1.0.2' # Versions > 1.0.2 have a bug in for ubuntu 12.04
 depends          'rubies'
 depends          'runit'
 depends          'xml'
