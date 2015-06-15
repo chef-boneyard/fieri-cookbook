@@ -8,27 +8,7 @@
 include_recipe 'git'
 include_recipe 'xml'
 include_recipe 'fieri::_ruby'
-
-group 'fieri' do
-  system true
-end
-
-user 'fieri' do
-  gid 'fieri'
-  system true
-  home node['fieri']['home']
-  comment 'Fieri'
-  shell '/bin/bash'
-end
-
-%w[ shared shared/bundle ].each do |dir|
-  directory "#{node['fieri']['home']}/#{dir}" do
-    user 'fieri'
-    group 'fieri'
-    mode 0755
-    recursive true
-  end
-end
+include_recipe 'fieri::_runit'
 
 begin
   app = data_bag_item(:apps, node['fieri']['data_bag'])
@@ -47,8 +27,8 @@ file "#{node['fieri']['home']}/shared/env" do
   group 'fieri'
   mode '0600'
 
-  notifies :restart, 'service[unicorn]'
-  notifies :restart, 'service[sidekiq]'
+  notifies :restart, 'runit_service[unicorn]'
+  notifies :restart, 'runit_service[sidekiq]'
 end
 
 template "#{node['fieri']['home']}/shared/unicorn.rb" do
@@ -61,7 +41,7 @@ deploy_revision node['fieri']['home'] do
   user 'fieri'
   group 'fieri'
 
-  create_dirs_before_symlink %w[ vendor ]
+  create_dirs_before_symlink %w( vendor )
   symlinks 'env' => '.env', 'bundle' => 'vendor/bundle'
   migrate false
   symlink_before_migrate({})
@@ -76,6 +56,6 @@ deploy_revision node['fieri']['home'] do
     end
   end
 
-  notifies :restart, 'service[unicorn]'
-  notifies :restart, 'service[sidekiq]'
+  notifies :restart, 'runit_service[unicorn]'
+  notifies :restart, 'runit_service[sidekiq]'
 end
