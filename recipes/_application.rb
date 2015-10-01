@@ -21,7 +21,7 @@ user 'fieri' do
   shell '/bin/bash'
 end
 
-%w[ shared shared/bundle ].each do |dir|
+%w( shared shared/bundle ).each do |dir|
   directory "#{node['fieri']['home']}/#{dir}" do
     user 'fieri'
     group 'fieri'
@@ -61,7 +61,7 @@ deploy_revision node['fieri']['home'] do
   user 'fieri'
   group 'fieri'
 
-  create_dirs_before_symlink %w[ vendor ]
+  create_dirs_before_symlink %w( vendor )
   symlinks 'env' => '.env', 'bundle' => 'vendor/bundle'
   migrate false
   symlink_before_migrate({})
