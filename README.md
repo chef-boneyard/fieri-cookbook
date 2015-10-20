@@ -3,7 +3,22 @@
 [![Cookbook Version](https://img.shields.io/cookbook/v/fieri.svg)](https://supermarket.chef.io/cookbooks/fieri)
 
 
-This cookbook deploys the [Fieri](https://github.com/opscode/fieri) application.
+This cookbook deploys the [Fieri](https://github.com/chef/fieri) application.
+
+
+Requirements
+------------
+#### Platforms
+- Debian/Ubuntu
+
+#### Chef
+- Chef 11+
+
+#### Cookbooks
+* apt
+* git
+* redisio
+* xml
 
 
 License & Authors
