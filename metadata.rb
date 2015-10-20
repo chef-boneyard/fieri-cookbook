@@ -11,5 +11,7 @@ depends          'git'
 depends          'redisio'
 depends          'xml'
 
+supports         'ubuntu'
+
 source_url 'https://github.com/chef-cookbooks/fieri' if respond_to?(:source_url)
 issues_url 'https://github.com/chef-cookbooks/fieri/issues' if respond_to?(:issues_url)
