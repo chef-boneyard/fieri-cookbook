@@ -1,7 +1,0 @@
-{
-  "id": "fieri",
-  "foodcritic_fail_tags": "any",
-  "results_endpoint": "https://supermarket.getchef.com/api/v1/cookbook-verisons/evaluation",
-  "auth_token": "someAuthToken",
-  "sentry_url": "test"
-}
