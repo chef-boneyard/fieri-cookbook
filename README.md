@@ -1,41 +1,7 @@
 # Fieri
-[![Build Status](https://travis-ci.org/chef-cookbooks/fieri.svg?branch=master)](http://travis-ci.org/chef-cookbooks/fieri)
-[![Cookbook Version](https://img.shields.io/cookbook/v/fieri.svg)](https://supermarket.chef.io/cookbooks/fieri)
 
+The Fieri service has become a part of a complete Supermarket system - the code has been moved into the [Supermarket code base](http://github.com/chef/supermarket).
 
-This cookbook deploys the [Fieri](https://github.com/chef/fieri) application.
+This cookbook should no longer be used for configuring Fieri, you should now configure it through whatever cookbook you use to configure Supermarket.
 
-
-Requirements
-------------
-#### Platforms
-- Debian/Ubuntu
-
-#### Chef
-- Chef 11+
-
-#### Cookbooks
-* apt
-* git
-* redisio
-* xml
-
-
-License & Authors
------------------
-
-```text
-Copyright 2009-2015, Chef Software, Inc.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
+This repo is deprecated and will no longer be accepting issues or pull-requests.
